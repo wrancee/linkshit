@@ -706,12 +706,14 @@ LinkGame.prototype = {
       self.cols = 6 + self.level*2;
       self.reset();
       $('.level1').addClass('hidden');
+      $('.b1').addClass('hidden');
       $('audio').get(0).play();
     }).on('click', '.b2', function (event) {
       self.rows = 6 + self.level;
       self.cols = 6 + self.level*2;
       self.reset();
       $('.level2').addClass('hidden');
+      $('.b2').addClass('hidden');
       $('audio').get(2).play();
       setTimeout(function () {
         $('audio').get(2).pause();
@@ -722,6 +724,7 @@ LinkGame.prototype = {
       self.cols = 6 + self.level*2;
       self.reset();
       $('.level3').addClass('hidden');
+      $('.b3').addClass('hidden');
       $('audio').get(3).play();
       setTimeout(function () {
         $('audio').get(3).pause();
@@ -730,6 +733,7 @@ LinkGame.prototype = {
     }).on('click', '.b4', function (event) {
       self.reset();
       $('.level4').addClass('hidden');
+      $('.b4').addClass('hidden');
       $('audio').get(4).play();
       $('.brandon').removeClass('hidden');
       setTimeout(function () {
