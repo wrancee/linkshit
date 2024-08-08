@@ -2222,7 +2222,12 @@ const images = [
   'images/background/l10.png',
   'images/background/l11.png',
   'images/background/l12.png',
-
+  'assets/100.png',
+  'assets/100.png',
+  'assets/300.png',
+  'assets/600.png',
+  'assets/1000.png',
+  'assets/1500.png',
 ];
 
 function preloadImages(imageArray, callback) {
