@@ -100,11 +100,27 @@ LinkGame.prototype = {
   nextLevel: function () {
     clearInterval(this.timmer);
     if (this.level === 1){
-      $('.level1').removeClass('hidden');
-      setTimeout(function () {
-        $('.b1').removeClass('hidden');
-      }, 800);
-      if (this.islogin === true){
+      if (this.isConnect === false){
+        $('.level1').removeClass('hidden');
+        setTimeout(function () {
+          $('audio').get(0).pause();
+          $('.level1').addClass('hidden');
+          $('.notlogin').removeClass('hidden');
+        }, 800);
+      }
+      else if (this.islogin === false){
+        $('.level1').removeClass('hidden');
+        setTimeout(function () {
+          $('audio').get(0).pause();
+          $('.level1').addClass('hidden');
+          $('.offline').removeClass('hidden');
+        }, 800);
+      }
+      else{
+        $('.level1').removeClass('hidden');
+        setTimeout(function () {
+          $('.b1').removeClass('hidden');
+        }, 800);
         const packId = localStorage.getItem('packId');
         console.log("packid got", packId);
         const prizeId = '01J4F71XJAX34SXTE3551SB47Q';
@@ -659,22 +675,10 @@ LinkGame.prototype = {
     }).on('click', '.disorder', function (event) {
       self.leftDisorderTime-- > 0 && self.disorder();
     }).on('click', '.b1', function (event) {
-      if (self.isConnect === false){
-        $('audio').get(0).pause();
-        $('.level1').addClass('hidden');
-        $('.notlogin').removeClass('hidden');
-      }
-      else if (self.islogin === false){
-        $('audio').get(0).pause();
-        $('.level1').addClass('hidden');
-        $('.offline').removeClass('hidden');
-      }
-      else{
-        self.rows = 6 + self.level;
-        self.cols = 6 + self.level*2;
-        self.reset();
-        $('.level1').addClass('hidden');
-      }
+      self.rows = 6 + self.level;
+      self.cols = 6 + self.level*2;
+      self.reset();
+      $('.level1').addClass('hidden');
     }).on('click', '.b2', function (event) {
       self.rows = 6 + self.level;
       self.cols = 6 + self.level*2;
@@ -798,11 +802,11 @@ bonusStage.prototype = {
     var self = this;
     this.stack = [];
     this.iconTypeCount = 5; // 图片的种类
-    this.count = (this.rows - 2) * (this.cols - 2);
-    this.remain = this.count;
-    this.pictures = [];
+    this.count = (this.rows - 2) * (this.cols - 2); // 图片的总数
+    this.remain = this.count; // 剩余的未有消去的图片
+    this.pictures = []; // 图片集合
     this.linkPictures = [];
-    this.preClickInfo = null;
+    this.preClickInfo = null; // 上一次被点中的图片信息
     this.lastMatchedPic = null;
     this.points = []; // 图片可以相消时的拐点集合
     this.timmer = setInterval(function () {
