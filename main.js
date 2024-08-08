@@ -2029,13 +2029,6 @@ async function signTransaction(address) {
 }
 
 $(function () {
-  $('.login-btn').click(function () {
-    $('.login').addClass('hidden');
-    $('.init-box').removeClass('hidden');
-  });
-});
-
-$(function () {
   $('.start-game').click(function () {
     $('audio').get(0).play();
     $('.login').addClass('hidden');
