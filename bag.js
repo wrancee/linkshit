@@ -78,6 +78,7 @@ $(function () {
                     console.log('Address is not registered.');
                     $('.notlogin').addClass('hidden');
                     $('.offline').removeClass('hidden');
+                    linkgame.isConnect = true;
                 }
               } catch (error) {
                   console.error('Failed to connect to the wallet:', error);
