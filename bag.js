@@ -21,6 +21,11 @@ $(function () {
                         $('audio').get(0).play();
                         $('.login').addClass('hidden');
                         $('.init-box').removeClass('hidden');
+
+                        //调试
+                        getPackId();
+                        console.log(localStorage.getItem('packId'));//修改：改成随机背包id
+
                     }else {
                         console.error('Login failed.');
                       }
@@ -55,13 +60,15 @@ $(function () {
                 } else if (isRegistered) {
                     const jwtToken = await loginWithWallet(address);
                     if (jwtToken) {
+                        linkgame.isConnect = true;
+                        linkgame.islogin = true;
                         $('audio').get(0).play();
                         $('.notlogin').addClass('hidden');
                         $('.level1').removeClass('hidden');
                         setTimeout(function () {
                             $('.b1').removeClass('hidden');
                         }, 800);
-                        const packId = '01J4M03SFNHT37E2JCCVHJ7P04'; //修改：随机背包id
+                        const packId = '01J4M03SFNHT37E2JCCVHJ7P04'; //随机背包id
                         const prizeId = '01J4F71XJAX34SXTE3551SB47Q';
                         handlePrize(packId, prizeId);
                     }else {
@@ -142,38 +149,33 @@ function getJwtToken() {
 //api for get prizes infos
 async function queryUserPrizeAccount(packId = '', prizeId = '') {
     try {
-        const jwtToken = getJwtToken(); // 从 localStorage 中获取 jwtToken
+        const jwtToken = getJwtToken(); 
         if (!jwtToken) {
             throw new Error('No JWT token found, please log in first.');
         }
-
         const requestURL = 'https://testnet.oshit.io/meme/api/v1/sol/game/queryUserPrizeAccount';
         const headers = {
-            'Authorization': `Bearer ${jwtToken}`,  // 将 jwtToken 添加到请求头
+            'Authorization': `Bearer ${jwtToken}`, 
             'Content-Type': 'application/x-www-form-urlencoded'
         };
-
         const formData = new URLSearchParams({
             packId: packId,
             prizeId: prizeId
         });
-
         const response = await fetch(requestURL, {
             method: 'POST',
             headers: headers,
             body: formData.toString()
         });
-
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const responseData = await response.json();
         console.log("data is here", responseData.data);
-        return responseData.data; // 返回 API 响应数据
+        return responseData.data; 
     } catch (error) {
         console.error('Error fetching user prize account:', error);
-        return null; // 出现错误时返回 null
+        return null; 
     }
 }
 
@@ -304,3 +306,45 @@ $(function () {
         });
     }
 });
+
+// 调试用，删除
+async function storePackId(packId = '', prizeId = '') {
+    try {
+        const jwtToken = localStorage.getItem('jwtToken'); 
+        if (!jwtToken) {
+            throw new Error('No JWT token found, please log in first.');
+        }
+        const requestURL = 'https://testnet.oshit.io/meme/api/v1/sol/game/queryUserPrizeAccount';
+        const headers = {
+            'Authorization': `Bearer ${jwtToken}`, 
+            'Content-Type': 'application/x-www-form-urlencoded'
+        };
+        const formData = new URLSearchParams({
+            packId: packId,
+            prizeId: prizeId
+        });
+        const response = await fetch(requestURL, {
+            method: 'POST',
+            headers: headers,
+            body: formData.toString()
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const responseData = await response.json();
+        console.log("data is here", responseData.data);
+        return responseData.data[0].packId; 
+    } catch (error) {
+        console.error('Error fetching user prize account:', error);
+        return null; 
+    }
+  }
+  
+  async function getPackId() {
+    try {
+        const packId = await storePackId();
+        localStorage.setItem('packId', packId);
+    } catch (error) {
+        console.error('Error fetching or storing packId:', error);
+    }
+  }
