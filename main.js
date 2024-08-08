@@ -2027,6 +2027,13 @@ async function signTransaction(address) {
 }
 
 $(function () {
+  $('.login-btn').click(function () {
+    $('.login').addClass('hidden');
+    $('.init-box').removeClass('hidden');
+  });
+});
+
+$(function () {
   $('.start-game').click(function () {
     $('audio').get(0).play();
     $('.login').addClass('hidden');
@@ -2244,41 +2251,40 @@ window.onload = () => {
 
 
 async function givePrize(packId, prizeId) {
-    try {
-        const jwtToken = getJwtToken();
-        if (!jwtToken) {
-            throw new Error('No JWT token found, please log in first.');
-        }
-        const requestURL = 'https://testnet.oshit.io/meme/api/v1/sol/game/givePrize';
-    
-        const formData = new URLSearchParams();
-        formData.append('packId', packId);
-        formData.append('prizeId', prizeId);
-    
-        const headers = {
-            'Authorization': `Bearer ${jwtToken}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
-        };
-        const response = await fetch(requestURL, {
-            method: 'POST',
-            headers: headers,
-            body: formData.toString()
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        console.log('Prize given successfully.');
-    } catch (error) {
-        console.error('Error giving prize:', error);
-    }
+  try {
+      const jwtToken = getJwtToken();
+      if (!jwtToken) {
+          throw new Error('No JWT token found, please log in first.');
+      }
+      const requestURL = 'https://testnet.oshit.io/meme/api/v1/sol/game/givePrize';
+  
+      const formData = new URLSearchParams();
+      formData.append('packId', packId);
+      formData.append('prizeId', prizeId);
+  
+      const headers = {
+          'Authorization': `Bearer ${jwtToken}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+      };
+      const response = await fetch(requestURL, {
+          method: 'POST',
+          headers: headers,
+          body: formData.toString()
+      });
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      console.log('Prize given successfully.');
+  } catch (error) {
+      console.error('Error giving prize:', error);
+  }
 }
 
 async function handlePrize(packId, prizeId) {
-    try {
-        await givePrize(packId, prizeId);
-        console.log('Prize request processed.');
-    } catch (error) {
-        console.error('Failed to give prize:', error);
-    }
+  try {
+      await givePrize(packId, prizeId);
+      console.log('Prize request processed.');
+  } catch (error) {
+      console.error('Failed to give prize:', error);
+  }
 }
-
