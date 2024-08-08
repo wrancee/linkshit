@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jolders/solana-web3-tools@0.1.8/build/index.min.js"></script>
+    
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="brandon hidden">It is the final SHIT! Let's go Brandon!!</div>
+        <div class="biden hidden">With his incredible soberness, logical thinking, mathematical skills and the power of SHIT, Biden becomes the 47th US President in Earth 67!</div>
+        <div class="trump hidden">After grabbing some good SHITs and firing them relentless at his opponent, Trump successfully raised a SHITstorm and becomes the 47th US President!</div>
+        <div class="harris hidden">With her bewitching laughter and loads of funny SHITs, Harris becomes the 47th US President. Her laughter has become symbolic of America and everyone is laughing their shits off like her for the next 4 years.</div>
+        <div class="boo hidden">The Americans has enough of bullshit. They want a different path.DogSHIT is the answer. Once again dog rules over humans supreme!</div>
+        <div class="satoshi hidden">The Americans prefer to have decentralized power. They reach a consensus and make Bitcoin the de facto ruling power. Spreading SHIT becomes their new vision.</div>
+
+        <div class="login">
+            <div class="left2"></div>
+            <button class="rule"></button>
+            <div class="login-btn"></div>
+            <div id="wallet-address"></div>
+            <div class="start-game"></div>
+        </div>
+        <div class="newPlayer hidden">
+            <p><br><br><br><br><br><br><br>You haven't registered yet</p>
+            <p>Please Claim SHIT first</p>
+            <p><br><br><br><br>or</p>
+            <p>Start game and login later</p>
+            <button class="claim"><span>Claim</span></button>
+            <button class="loginlater"><span>Start Game</span></button>
+        </div>
+        <div class="offline hidden">
+            <img src="assets/100.png" alt="Offline Image" class="offline-image">
+            <p><br><br><br><br>You haven't registered yet</p>
+            <p>Please Claim SHIT</p>
+            <p>to get your reward</p>
+            <button class="claim2"><span>Claim</span></button>
+        </div>
+        <div class="notlogin hidden">
+            <img src="assets/100.png" alt="notlogin Image" class="notlogin-image">
+            <p><br><br><br><br>Please connect your wallet</p>
+            <p>to login and get your reward</p>
+            <button class="tologin"><span>Log in</span></button>
+        </div>
+        <div class="bag hidden">
+            <div id="prevPage" class="prevPage"></div>
+            <div id="nextPage" class="nextPage"></div>
+            <div class="close"></div>
+            <div class="logo1"></div>
+            <div class="slots-container">
+                <div class="slot" data-slot-index="0"></div>
+                <div class="slot" data-slot-index="1"></div>
+                <div class="slot" data-slot-index="2"></div>
+                <div class="slot" data-slot-index="3"></div>
+                <div class="slot" data-slot-index="4"></div>
+                <div class="slot" data-slot-index="5"></div>
+                <div class="slot" data-slot-index="6"></div>
+                <div class="slot" data-slot-index="7"></div>
+                <div class="slot" data-slot-index="8"></div>
+                <div class="slot" data-slot-index="9"></div>
+                <div class="slot" data-slot-index="10"></div>
+                <div class="slot" data-slot-index="11"></div>
+                <div class="slot" data-slot-index="12"></div>
+                <div class="slot" data-slot-index="13"></div>
+                <div class="slot" data-slot-index="14"></div>
+                <div class="slot" data-slot-index="15"></div>
+                <div class="slot" data-slot-index="16"></div>
+                <div class="slot" data-slot-index="17"></div>
+                <div class="slot" data-slot-index="18"></div>
+                <div class="slot" data-slot-index="19"></div>
+                <div class="slot" data-slot-index="20"></div>
+                <div class="slot" data-slot-index="21"></div>
+                <div class="slot" data-slot-index="22"></div>
+                <div class="slot" data-slot-index="23"></div>
+                <div class="slot" data-slot-index="24"></div>
+                <div class="slot" data-slot-index="25"></div>
+                <div class="slot" data-slot-index="26"></div>
+                <div class="slot" data-slot-index="27"></div>
+            </div>
+        </div>
+
+        <div class="init-box hidden">
+            <div class="left"></div>
+            <div class="bag-btn"></div>
+            <button class="logo"></button>
+            <div class="start-btn1"></div>
+            <div class="start-btn2"></div>
+        </div>
+        <div class="normalbg hidden"></div>
+        <div class="limitedbg hidden"></div>
+        <div class="game-box hidden">
+            <div class="toolbar">
+                <div class="time"></div>
+                <div class="level"></div>
+                <div class="disorder"></div>
+                <div class="scoring"></div>
+            </div>
+        <div class="game-area">
+            <table id="game">
+                <canvas id="canvas" class="hidden" width=800 height=560></canvas>
+            </table>
+        </div>
+    </div>
+    <div class="level1 hidden">
+        <div class="t1"></div>
+        <button class="b1 hidden"><span>Next Level</span></button>
+    </div>
+    <div class="level2 hidden">
+        <div class="t2"></div>
+        <button class="b2 hidden"><span>Next Level</span></button>
+    </div>
+    <div class="level3 hidden">
+        <div class="t3"></div>
+        <button class="b3 hidden"><span>Next Level</span></button>
+    </div>
+    <div class="level4 hidden">
+        <div class="t4"></div>
+        <button class="b4 hidden"><span>Next Level</span></button>
+    </div>
+    <div class="level5 hidden">
+        <div class="t5"></div>
+    </div>
+    <div class="game-win hidden">
+        <div class="current"></div>
+        <div class="back-btn2"></div>
+        <div class="get-token2"></div>
+    </div>
+    <div class="time-out hidden">
+        <div class="current-score3"></div>
+        <div class="back-btn3"></div>
+        <div class="get-token3"></div>
+    </div>
+    <div class="game-over hidden">
+        <div class="current-score"></div>
+        <div class="replay-btn"></div>
+        <div class="back-btn"></div>
+        <div class="get-token"></div>
+    </div>
+    <audio class="hidden" src="audio/Game.mp3" loop="loop"></audio>
+    <audio class="hidden" src="audio/GameOver.mp3"></audio>
+    <audio class="hidden" src="audio/harris.mp3"></audio>
+    <audio class="hidden" src="audio/trump.mp3"></audio>
+    <audio class="hidden" src="audio/biden.mp3"></audio>
+    <audio class="hidden" src="audio/trumpwin.mp3"></audio>
+    <audio class="hidden" src="audio/boo.mp3"></audio>
+    </div>
+    <script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+    <script type="module" src="main.js" ></script>
+    <script type="module" src="api.js"></script>
+    <script type="module" src="bag.js"></script>
+</body>
+</html>
