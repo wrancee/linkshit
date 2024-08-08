@@ -105,7 +105,8 @@ LinkGame.prototype = {
         $('.b1').removeClass('hidden');
       }, 800);
       if (this.islogin === true){
-        const packId = '01J4M03SFNHT37E2JCCVHJ7P04';//修改：改成随机背包id
+        getPackId();
+        const packId = localStorage.getItem('packId');//修改：改成随机背包id
         const prizeId = '01J4F71XJAX34SXTE3551SB47Q';
         handlePrize(packId, prizeId);
       }
@@ -115,7 +116,7 @@ LinkGame.prototype = {
       setTimeout(function () {
         $('.b2').removeClass('hidden');
       }, 800);
-      const packId = '01J4M03SFNHT37E2JCCVHJ7P04';//修改：改成随机背包id
+      const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKBR7ZYMC9C2Y8C15ZE';
       handlePrize(packId, prizeId);
     }
@@ -124,7 +125,7 @@ LinkGame.prototype = {
       setTimeout(function () {
         $('.b3').removeClass('hidden');
       }, 800);
-      const packId = '01J4M03SFNHT37E2JCCVHJ7P04';//修改：改成随机背包id
+      const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKDW20SM37XAPG4G9KS';
       handlePrize(packId, prizeId);
     }
@@ -133,13 +134,13 @@ LinkGame.prototype = {
       setTimeout(function () {
         $('.b4').removeClass('hidden');
       }, 800);
-      const packId = '01J4M03SFNHT37E2JCCVHJ7P04';//修改：改成随机背包id
+      const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKEBQ2E8V5RKQB2395C';
       handlePrize(packId, prizeId);
     }
     else if (this.level === 5) {
       $('.level5').removeClass('hidden');
-      const packId = '01J4M03SFNHT37E2JCCVHJ7P04';//修改：改成随机背包id
+      const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKFFZAHZKC4GVSFNB40';
       handlePrize(packId, prizeId);
       setTimeout(function () {
@@ -2286,5 +2287,46 @@ async function handlePrize(packId, prizeId) {
       console.log('Prize request processed.');
   } catch (error) {
       console.error('Failed to give prize:', error);
+  }
+}
+
+async function storePackId(packId = '', prizeId = '') {
+  try {
+      const jwtToken = localStorage.getItem('jwtToken'); 
+      if (!jwtToken) {
+          throw new Error('No JWT token found, please log in first.');
+      }
+      const requestURL = 'https://testnet.oshit.io/meme/api/v1/sol/game/queryUserPrizeAccount';
+      const headers = {
+          'Authorization': `Bearer ${jwtToken}`, 
+          'Content-Type': 'application/x-www-form-urlencoded'
+      };
+      const formData = new URLSearchParams({
+          packId: packId,
+          prizeId: prizeId
+      });
+      const response = await fetch(requestURL, {
+          method: 'POST',
+          headers: headers,
+          body: formData.toString()
+      });
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log("data is here", responseData.data);
+      return responseData.data[0].packId; 
+  } catch (error) {
+      console.error('Error fetching user prize account:', error);
+      return null; 
+  }
+}
+
+async function getPackId() {
+  try {
+      const packId = await storePackId();
+      localStorage.setItem('packId', packId);
+  } catch (error) {
+      console.error('Error fetching or storing packId:', error);
   }
 }
