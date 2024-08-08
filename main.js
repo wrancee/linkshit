@@ -1389,7 +1389,7 @@ function LinkGame2(config) {
   this.cols = config.cols + 2 ; // 列数
   this.rows = config.rows + 2 ; // 行数
   this.level = config.level || 0; // 等级
-  this.leftTime = 201; // 剩余时间
+  this.leftTime = 10; // 剩余时间
   this.leftDisorderTime = 5; // 剩余重排次数
   this.gifts = [ // 小图片集合
     'images/metashit/angit.png',
@@ -2169,6 +2169,43 @@ $(function () {
 });
 
 $(function () {
+  $('.get-token3').click(function () {
+    $('.time-out').addClass('hidden');
+    const randomId = getRandomPrize();
+    if (randomId === "01J4F71XJAX34SXTE3551SB47Q"){
+      $('.level1').removeClass('hidden');
+    }
+    else if (randomId === "01J4KZYYKBR7ZYMC9C2Y8C15ZE"){
+      $('.level2').removeClass('hidden');
+    }
+    else if (randomId === "01J4KZYYKDW20SM37XAPG4G9KS"){
+      $('.level3').removeClass('hidden');
+    }
+    else if (randomId === "01J4KZYYKEBQ2E8V5RKQB2395C"){
+      $('.level4').removeClass('hidden');
+    }
+    else if (randomId === "01J4KZYYKFFZAHZKC4GVSFNB40"){
+      $('.level5').removeClass('hidden');
+    }
+    $('audio').get(0).pause();
+    $('audio').get(7).play();
+    setTimeout(function () {
+      $('.b6').removeClass('hidden');
+      $('audio').get(7).pause();
+    }, 800);
+  });
+});
+
+$(function () {
+  $('.b6').click(function () {
+    window.linkgame.unbindDomEvents();
+    $('.init-box').removeClass('hidden');
+    $('.game-box').addClass('hidden');
+  });
+});
+
+
+$(function () {
   $('.logo').click(function () {
     //rules appear
     $('audio').get(0).play();
@@ -2311,3 +2348,20 @@ async function handlePrize(packId, prizeId) {
       console.error('Failed to give prize:', error);
   }
 }
+
+
+function getRandomPrize() {
+  const ids = [
+      "01J4F71XJAX34SXTE3551SB47Q",
+      "01J4KZYYKBR7ZYMC9C2Y8C15ZE",
+      "01J4KZYYKDW20SM37XAPG4G9KS",
+      "01J4KZYYKEBQ2E8V5RKQB2395C",
+      "01J4KZYYKFFZAHZKC4GVSFNB40"
+  ];
+
+  const randomIndex = Math.floor(Math.random() * ids.length);
+  return ids[randomIndex];
+}
+
+const randomPrize = getRandomPrize();
+console.log(randomPrize); 
