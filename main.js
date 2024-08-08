@@ -105,7 +105,7 @@ LinkGame.prototype = {
         $('.b1').removeClass('hidden');
       }, 800);
       if (this.islogin === true){
-        const packId = localStorage.getItem('packId');//修改：改成随机背包id
+        const packId = localStorage.getItem('packId');
         console.log("packid got", packId);
         const prizeId = '01J4F71XJAX34SXTE3551SB47Q';
         handlePrize(packId, prizeId);
@@ -116,7 +116,7 @@ LinkGame.prototype = {
       setTimeout(function () {
         $('.b2').removeClass('hidden');
       }, 800);
-      const packId = localStorage.getItem('packId');//修改：改成随机背包id
+      const packId = localStorage.getItem('packId');
       const prizeId = '01J4KZYYKBR7ZYMC9C2Y8C15ZE';
       handlePrize(packId, prizeId);
     }
@@ -2028,6 +2028,13 @@ async function signTransaction(address) {
 }
 
 $(function () {
+  $('.login-btn').click(function () {
+    $('.login').addClass('hidden');
+    $('.init-box').removeClass('hidden');
+  });
+});
+
+$(function () {
   $('.start-game').click(function () {
     $('audio').get(0).play();
     $('.login').addClass('hidden');
@@ -2269,8 +2276,6 @@ async function givePrize(packId, prizeId) {
           throw new Error(`HTTP error! Status: ${response.status}`);
       }
       console.log('Prize given successfully.');
-      console.log('Prize given PackId.', packId);
-      console.log('Prize given prizeId.', prizeId);
   } catch (error) {
       console.error('Error giving prize:', error);
   }
@@ -2282,46 +2287,5 @@ async function handlePrize(packId, prizeId) {
       console.log('Prize request processed.');
   } catch (error) {
       console.error('Failed to give prize:', error);
-  }
-}
-
-async function storePackId(packId = '', prizeId = '') {
-  try {
-      const jwtToken = localStorage.getItem('jwtToken'); 
-      if (!jwtToken) {
-          throw new Error('No JWT token found, please log in first.');
-      }
-      const requestURL = 'https://testnet.oshit.io/meme/api/v1/sol/game/queryUserPrizeAccount';
-      const headers = {
-          'Authorization': `Bearer ${jwtToken}`, 
-          'Content-Type': 'application/x-www-form-urlencoded'
-      };
-      const formData = new URLSearchParams({
-          packId: packId,
-          prizeId: prizeId
-      });
-      const response = await fetch(requestURL, {
-          method: 'POST',
-          headers: headers,
-          body: formData.toString()
-      });
-      if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const responseData = await response.json();
-      console.log("data is here", responseData.data);
-      return responseData.data[0].packId; 
-  } catch (error) {
-      console.error('Error fetching user prize account:', error);
-      return null; 
-  }
-}
-
-async function getPackId() {
-  try {
-      const packId = await storePackId();
-      localStorage.setItem('packId', packId);
-  } catch (error) {
-      console.error('Error fetching or storing packId:', error);
   }
 }
