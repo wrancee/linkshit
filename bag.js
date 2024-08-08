@@ -305,7 +305,7 @@ $(function () {
     }
 });
 
-async function givePrize(packId, prizeId) {
+export async function givePrize(packId, prizeId) {
     try {
         const jwtToken = getJwtToken();
         if (!jwtToken) {
