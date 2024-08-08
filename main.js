@@ -2179,22 +2179,10 @@ $(function () {
 $(function () {
   $('.get-token3').click(function () {
     $('.time-out').addClass('hidden');
-    const randomId = getRandomPrize();
-    if (randomId === "01J4F71XJAX34SXTE3551SB47Q"){
-      $('.level1').removeClass('hidden');
-    }
-    else if (randomId === "01J4KZYYKBR7ZYMC9C2Y8C15ZE"){
-      $('.level2').removeClass('hidden');
-    }
-    else if (randomId === "01J4KZYYKDW20SM37XAPG4G9KS"){
-      $('.level3').removeClass('hidden');
-    }
-    else if (randomId === "01J4KZYYKEBQ2E8V5RKQB2395C"){
-      $('.level4').removeClass('hidden');
-    }
-    else if (randomId === "01J4KZYYKFFZAHZKC4GVSFNB40"){
-      $('.level5').removeClass('hidden');
-    }
+    displayPrizes(linkgame.score);
+    //调试
+    console.log("score is ", linkgame.score);
+    $('.luckybox').removeClass('hidden');
     $('audio').get(0).pause();
     $('audio').get(7).play();
     setTimeout(function () {
@@ -2209,11 +2197,7 @@ $(function () {
   $('.b6').click(function () {
     window.linkgame.unbindDomEvents();
     $('audio').get(0).currentTime = 0;
-    $('.level1').addClass('hidden');
-    $('.level2').addClass('hidden');
-    $('.level3').addClass('hidden');
-    $('.level4').addClass('hidden');
-    $('.level5').addClass('hidden');
+    $('.luckybox').addClass('hidden');
     $('.b6').addClass('hidden')
     $('.init-box').removeClass('hidden');
     $('.game-box').addClass('hidden');
@@ -2254,19 +2238,6 @@ $(function () {
   });
 });
 
-$(function () {
-  $('.bag-btn').click(function () {
-    $('.bag').removeClass('hidden');
-    $('.init-box').addClass('hidden');
-  });
-});
-
-$(function () {
-  $('.close').click(function () {
-    $('.bag').addClass('hidden');
-    $('.init-box').removeClass('hidden');
-  });
-});
 
 const images = [
   'images/background/bg1.png',
@@ -2379,5 +2350,37 @@ function getRandomPrize() {
   return ids[randomIndex];
 }
 
-const randomPrize = getRandomPrize();
-console.log(randomPrize); 
+function displayPrizes(score) {
+
+  const prizeImageMap = {
+    "01J4F71XJAX34SXTE3551SB47Q": "assets/100.png",
+    "01J4KZYYKBR7ZYMC9C2Y8C15ZE": "assets/300.png",
+    "01J4KZYYKDW20SM37XAPG4G9KS": "assets/600.png",
+    "01J4KZYYKEBQ2E8V5RKQB2395C": "assets/1000.png",
+    "01J4KZYYKFFZAHZKC4GVSFNB40": "assets/1500.png"
+};
+
+  const container = document.querySelector('.wrapper .luckybox');
+  container.innerHTML = ''; 
+
+  let numberOfImages = 0;
+  if (score > 10) {
+      numberOfImages = 3;
+  } else if (score > 1000) {
+      numberOfImages = 2;
+  } else if (score > 500) {
+      numberOfImages = 1;
+  }
+
+  for (let i = 0; i < numberOfImages; i++) {
+      const randomId = getRandomPrize();
+      const imgSrc = prizeImageMap[randomId];
+
+      const imgElement = document.createElement('div');
+      imgElement.className = 'luckyprize';
+      imgElement.style.backgroundImage = `url('${imgSrc}')`;
+      imgElement.style.top = `${i * 220}px`; // Adjust top position for vertical alignment
+
+      container.appendChild(imgElement);
+  }
+}
