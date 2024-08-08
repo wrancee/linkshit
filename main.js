@@ -2252,7 +2252,7 @@ window.onload = () => {
 
 async function givePrize(packId, prizeId) {
   try {
-      const jwtToken = getJwtToken();
+      const jwtToken = localStorage.getItem('jwtToken');
       if (!jwtToken) {
           throw new Error('No JWT token found, please log in first.');
       }
