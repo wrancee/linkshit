@@ -21,11 +21,7 @@ $(function () {
                         $('audio').get(0).play();
                         $('.login').addClass('hidden');
                         $('.init-box').removeClass('hidden');
-
-                        //调试
                         getPackId();
-                        console.log(localStorage.getItem('packId'));//修改：改成随机背包id
-
                     }else {
                         console.error('Login failed.');
                       }
@@ -68,7 +64,8 @@ $(function () {
                         setTimeout(function () {
                             $('.b1').removeClass('hidden');
                         }, 800);
-                        const packId = '01J4M03SFNHT37E2JCCVHJ7P04'; //随机背包id
+                        getPackId();
+                        const packId = localStorage.getItem('packId');
                         const prizeId = '01J4F71XJAX34SXTE3551SB47Q';
                         handlePrize(packId, prizeId);
                     }else {
@@ -308,7 +305,6 @@ $(function () {
     }
 });
 
-// 调试用，删除
 async function storePackId(packId = '', prizeId = '') {
     try {
         const jwtToken = localStorage.getItem('jwtToken'); 
@@ -348,3 +344,43 @@ async function storePackId(packId = '', prizeId = '') {
         console.error('Error fetching or storing packId:', error);
     }
   }
+
+  async function givePrize(packId, prizeId) {
+    try {
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) {
+            throw new Error('No JWT token found, please log in first.');
+        }
+        const requestURL = 'https://testnet.oshit.io/meme/api/v1/sol/game/givePrize';
+    
+        const formData = new URLSearchParams();
+        formData.append('packId', packId);
+        formData.append('prizeId', prizeId);
+    
+        const headers = {
+            'Authorization': `Bearer ${jwtToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        };
+        const response = await fetch(requestURL, {
+            method: 'POST',
+            headers: headers,
+            body: formData.toString()
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log('Prize given successfully.');
+    } catch (error) {
+        console.error('Error giving prize:', error);
+    }
+  }
+  
+  async function handlePrize(packId, prizeId) {
+    try {
+        await givePrize(packId, prizeId);
+        console.log('Prize request processed.');
+    } catch (error) {
+        console.error('Failed to give prize:', error);
+    }
+  }
+  
