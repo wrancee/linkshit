@@ -105,22 +105,22 @@ LinkGame.prototype = {
         $('audio').get(0).pause();
         $('audio').get(7).play();
         setTimeout(function () {
-          $('audio').get(0).pause();
           $('audio').get(7).pause();
+          $('audio').get(7).currentTime = 0;
           $('.level1').addClass('hidden');
           $('.notlogin').removeClass('hidden');
-        }, 800);
+        }, 1000);
       }
       else if (this.islogin === false){
         $('.level1').removeClass('hidden');
         $('audio').get(0).pause();
         $('audio').get(7).play();
         setTimeout(function () {
-          $('audio').get(0).pause();
           $('audio').get(7).pause();
+          $('audio').get(7).currentTime = 0;
           $('.level1').addClass('hidden');
           $('.offline').removeClass('hidden');
-        }, 800);
+        }, 1000);
       }
       else{
         $('.level1').removeClass('hidden');
@@ -129,7 +129,8 @@ LinkGame.prototype = {
         setTimeout(function () {
           $('.b1').removeClass('hidden');
           $('audio').get(7).pause();
-        }, 800);
+          $('audio').get(7).currentTime = 0;
+        }, 1000);
         const packId = localStorage.getItem('packId');
         console.log("packid got", packId);
         const prizeId = '01J4F71XJAX34SXTE3551SB47Q';
@@ -143,7 +144,8 @@ LinkGame.prototype = {
       setTimeout(function () {
         $('.b2').removeClass('hidden');
         $('audio').get(7).pause();
-      }, 800);
+        $('audio').get(7).currentTime = 0;
+      }, 1000);
       const packId = localStorage.getItem('packId');
       const prizeId = '01J4KZYYKBR7ZYMC9C2Y8C15ZE';
       handlePrize(packId, prizeId);
@@ -155,7 +157,8 @@ LinkGame.prototype = {
       setTimeout(function () {
         $('.b3').removeClass('hidden');
         $('audio').get(7).pause();
-      }, 800);
+        $('audio').get(7).currentTime = 0;
+      }, 1000);
       const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKDW20SM37XAPG4G9KS';
       handlePrize(packId, prizeId);
@@ -167,7 +170,8 @@ LinkGame.prototype = {
       setTimeout(function () {
         $('.b4').removeClass('hidden');
         $('audio').get(7).pause();
-      }, 800);
+        $('audio').get(7).currentTime = 0;
+      }, 1000);
       const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKEBQ2E8V5RKQB2395C';
       handlePrize(packId, prizeId);
@@ -184,6 +188,7 @@ LinkGame.prototype = {
         $('.level5').addClass('hidden');
         $('.game-win').removeClass('hidden');
         $('audio').get(7).pause();
+        $('audio').get(7).currentTime = 0;
       }, 1500);
     }
 
@@ -2144,6 +2149,7 @@ $(function () {
 $(function () {
   $('.back-btn').click(function () {
     window.linkgame.unbindDomEvents();
+    $('audio').get(0).currentTime = 0;
     $('.init-box').removeClass('hidden');
     $('.game-box').addClass('hidden');
     $('.game-over').addClass('hidden');
@@ -2153,6 +2159,7 @@ $(function () {
 $(function () {
   $('.back-btn2').click(function () {
     window.linkgame.unbindDomEvents();
+    $('audio').get(0).currentTime = 0;
     $('.init-box').removeClass('hidden');
     $('.game-box').addClass('hidden');
     $('.game-win').addClass('hidden');
@@ -2162,6 +2169,7 @@ $(function () {
 $(function () {
   $('.back-btn3').click(function () {
     window.linkgame.unbindDomEvents();
+    $('audio').get(0).currentTime = 0;
     $('.init-box').removeClass('hidden');
     $('.game-box').addClass('hidden');
     $('.time-out').addClass('hidden');
@@ -2192,13 +2200,21 @@ $(function () {
     setTimeout(function () {
       $('.b6').removeClass('hidden');
       $('audio').get(7).pause();
-    }, 800);
+      $('audio').get(7).currentTime = 0;
+    }, 1000);
   });
 });
 
 $(function () {
   $('.b6').click(function () {
     window.linkgame.unbindDomEvents();
+    $('audio').get(0).currentTime = 0;
+    $('.level1').addClass('hidden');
+    $('.level2').addClass('hidden');
+    $('.level3').addClass('hidden');
+    $('.level4').addClass('hidden');
+    $('.level5').addClass('hidden');
+    $('.b6').addClass('hidden')
     $('.init-box').removeClass('hidden');
     $('.game-box').addClass('hidden');
   });
@@ -2362,3 +2378,6 @@ function getRandomPrize() {
   const randomIndex = Math.floor(Math.random() * ids.length);
   return ids[randomIndex];
 }
+
+const randomPrize = getRandomPrize();
+console.log(randomPrize); 
