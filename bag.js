@@ -333,7 +333,6 @@ async function storePackId(packId = '', prizeId = '') {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const responseData = await response.json();
-        console.log("data is here", responseData.data[0].packId);
         return responseData.data[0].packId; 
     } catch (error) {
         console.error('Error fetching user prize account:', error);
@@ -345,8 +344,6 @@ async function storePackId(packId = '', prizeId = '') {
     try {
         const packId = await storePackId();
         localStorage.setItem('packId', packId);
-        console.log("your pack id is: ", packId);
-        console.log("your pack id is: ", localStorage.getItem('packId'));
     } catch (error) {
         console.error('Error fetching or storing packId:', error);
     }
