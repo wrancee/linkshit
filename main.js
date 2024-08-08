@@ -1,7 +1,5 @@
 'use strict';
 
-import { handlePrize, givePrize } from 'bag.js';
-
 function LinkGame(config) {
   if (!(this instanceof LinkGame)) {
     return new LinkGame(config);
@@ -2243,4 +2241,44 @@ window.onload = () => {
       document.querySelector('.normalbg').classList.add('animation-start');
   });
 };
+
+
+async function givePrize(packId, prizeId) {
+    try {
+        const jwtToken = getJwtToken();
+        if (!jwtToken) {
+            throw new Error('No JWT token found, please log in first.');
+        }
+        const requestURL = 'https://testnet.oshit.io/meme/api/v1/sol/game/givePrize';
+    
+        const formData = new URLSearchParams();
+        formData.append('packId', packId);
+        formData.append('prizeId', prizeId);
+    
+        const headers = {
+            'Authorization': `Bearer ${jwtToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        };
+        const response = await fetch(requestURL, {
+            method: 'POST',
+            headers: headers,
+            body: formData.toString()
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log('Prize given successfully.');
+    } catch (error) {
+        console.error('Error giving prize:', error);
+    }
+}
+
+async function handlePrize(packId, prizeId) {
+    try {
+        await givePrize(packId, prizeId);
+        console.log('Prize request processed.');
+    } catch (error) {
+        console.error('Failed to give prize:', error);
+    }
+}
 
