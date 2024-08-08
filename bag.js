@@ -333,7 +333,7 @@ async function storePackId(packId = '', prizeId = '') {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const responseData = await response.json();
-        console.log("data is here", responseData.data);
+        console.log("data is here", responseData.data[0].packId);
         return responseData.data[0].packId; 
     } catch (error) {
         console.error('Error fetching user prize account:', error);
