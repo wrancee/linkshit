@@ -471,6 +471,24 @@
   height: 560px;
 }
 
+.wrapper .b6 {
+  position: absolute;
+  top: 500px;
+  left: 310px;
+  width: 200px;
+  height: 65px;
+  background: url('images/background/button.png') center no-repeat;
+  cursor: pointer;
+}
+
+.wrapper .b6 span {
+  font-family: 'Crang', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
 .wrapper .level1 {
   position: absolute;
   top: 0;
