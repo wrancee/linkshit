@@ -1,6 +1,6 @@
 'use strict';
 
-import { handlePrize } from 'bag.js';
+import { handlePrize, givePrize } from 'bag.js';
 
 function LinkGame(config) {
   if (!(this instanceof LinkGame)) {
