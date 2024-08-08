@@ -2276,6 +2276,8 @@ async function givePrize(packId, prizeId) {
           throw new Error(`HTTP error! Status: ${response.status}`);
       }
       console.log('Prize given successfully.');
+      console.log('Prize given PackId.', packId);
+      console.log('Prize given prizeId.', prizeId);
   } catch (error) {
       console.error('Error giving prize:', error);
   }
