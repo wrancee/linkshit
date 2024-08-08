@@ -106,7 +106,7 @@ LinkGame.prototype = {
       }, 800);
       if (this.islogin === true){
         const packId = localStorage.getItem('packId');//修改：改成随机背包id
-        console.log("packid got", packId)
+        console.log("packid got", packId);
         const prizeId = '01J4F71XJAX34SXTE3551SB47Q';
         handlePrize(packId, prizeId);
       }
