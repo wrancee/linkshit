@@ -161,8 +161,9 @@ LinkGame.prototype = {
       handlePrize(packId, prizeId);
       setTimeout(function () {
         $('.level5').addClass('hidden');
+        $('.brandon').addClass('hidden');
         $('.game-win').removeClass('hidden');
-      }, 1200);
+      }, 1500);
     }
 
   },
