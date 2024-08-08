@@ -102,24 +102,33 @@ LinkGame.prototype = {
     if (this.level === 1){
       if (this.isConnect === false){
         $('.level1').removeClass('hidden');
+        $('audio').get(0).pause();
+        $('audio').get(7).play();
         setTimeout(function () {
           $('audio').get(0).pause();
+          $('audio').get(7).pause();
           $('.level1').addClass('hidden');
           $('.notlogin').removeClass('hidden');
         }, 800);
       }
       else if (this.islogin === false){
         $('.level1').removeClass('hidden');
+        $('audio').get(0).pause();
+        $('audio').get(7).play();
         setTimeout(function () {
           $('audio').get(0).pause();
+          $('audio').get(7).pause();
           $('.level1').addClass('hidden');
           $('.offline').removeClass('hidden');
         }, 800);
       }
       else{
         $('.level1').removeClass('hidden');
+        $('audio').get(0).pause();
+        $('audio').get(7).play();
         setTimeout(function () {
           $('.b1').removeClass('hidden');
+          $('audio').get(7).pause();
         }, 800);
         const packId = localStorage.getItem('packId');
         console.log("packid got", packId);
@@ -129,8 +138,11 @@ LinkGame.prototype = {
     }
     else if (this.level === 2) {
       $('.level2').removeClass('hidden');
+      $('audio').get(0).pause();
+      $('audio').get(7).play();
       setTimeout(function () {
         $('.b2').removeClass('hidden');
+        $('audio').get(7).pause();
       }, 800);
       const packId = localStorage.getItem('packId');
       const prizeId = '01J4KZYYKBR7ZYMC9C2Y8C15ZE';
@@ -138,8 +150,11 @@ LinkGame.prototype = {
     }
     else if (this.level === 3) {
       $('.level3').removeClass('hidden');
+      $('audio').get(0).pause();
+      $('audio').get(7).play();
       setTimeout(function () {
         $('.b3').removeClass('hidden');
+        $('audio').get(7).pause();
       }, 800);
       const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKDW20SM37XAPG4G9KS';
@@ -147,8 +162,11 @@ LinkGame.prototype = {
     }
     else if (this.level === 4) {
       $('.level4').removeClass('hidden');
+      $('audio').get(0).pause();
+      $('audio').get(7).play();
       setTimeout(function () {
         $('.b4').removeClass('hidden');
+        $('audio').get(7).pause();
       }, 800);
       const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKEBQ2E8V5RKQB2395C';
@@ -156,13 +174,16 @@ LinkGame.prototype = {
     }
     else if (this.level === 5) {
       $('.level5').removeClass('hidden');
+      $('.brandon').addClass('hidden');
+      $('audio').get(0).pause();
+      $('audio').get(7).play();
       const packId = localStorage.getItem('packId');//修改：改成随机背包id
       const prizeId = '01J4KZYYKFFZAHZKC4GVSFNB40';
       handlePrize(packId, prizeId);
       setTimeout(function () {
         $('.level5').addClass('hidden');
-        $('.brandon').addClass('hidden');
         $('.game-win').removeClass('hidden');
+        $('audio').get(7).pause();
       }, 1500);
     }
 
@@ -680,12 +701,12 @@ LinkGame.prototype = {
       self.cols = 6 + self.level*2;
       self.reset();
       $('.level1').addClass('hidden');
+      $('audio').get(0).play();
     }).on('click', '.b2', function (event) {
       self.rows = 6 + self.level;
       self.cols = 6 + self.level*2;
       self.reset();
       $('.level2').addClass('hidden');
-      $('audio').get(0).pause();
       $('audio').get(2).play();
       setTimeout(function () {
         $('audio').get(2).pause();
@@ -696,7 +717,6 @@ LinkGame.prototype = {
       self.cols = 6 + self.level*2;
       self.reset();
       $('.level3').addClass('hidden');
-      $('audio').get(0).pause();
       $('audio').get(3).play();
       setTimeout(function () {
         $('audio').get(3).pause();
@@ -705,7 +725,6 @@ LinkGame.prototype = {
     }).on('click', '.b4', function (event) {
       self.reset();
       $('.level4').addClass('hidden');
-      $('audio').get(0).pause();
       $('audio').get(4).play();
       $('.brandon').removeClass('hidden');
       setTimeout(function () {
@@ -2228,7 +2247,7 @@ const images = [
   'assets/300.png',
   'assets/600.png',
   'assets/1000.png',
-  'assets/1500.png',
+  'assets/1500.png'
 ];
 
 function preloadImages(imageArray, callback) {
