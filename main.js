@@ -2362,6 +2362,3 @@ function getRandomPrize() {
   const randomIndex = Math.floor(Math.random() * ids.length);
   return ids[randomIndex];
 }
-
-const randomPrize = getRandomPrize();
-console.log(randomPrize); 
