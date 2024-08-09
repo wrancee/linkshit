@@ -1019,3 +1019,24 @@
   height: 90px;
   margin: 0 auto;
 }
+
+.wrapper .bag .redeem-btn {
+  position: absolute;
+  top: 295px;
+  left: 310px;
+  width: 200px;
+  height: 65px;
+  background: url('images/background/button.png') center no-repeat;
+  cursor: not-allowed;
+}
+.wrapper .bag .redeem-btn.active {
+  background-color: green;
+  cursor: pointer;
+}
+.wrapper .bag .redeem-btn span {
+  font-family: 'Crang', sans-serif; 
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
