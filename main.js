@@ -82,7 +82,7 @@ LinkGame.prototype = {
     this.isConnect = true;
     this.islogin = true;
     this.lastMatchedPic = null;
-    this.leftTime = 100; // 剩余时间
+    this.leftTime = 91; // 剩余时间
     this.points = []; // 图片可以相消时的拐点集合
     this.timmer = setInterval(function () {
       self.updateCountDown();
@@ -1398,7 +1398,7 @@ function LinkGame2(config) {
   this.cols = config.cols + 2 ; // 列数
   this.rows = config.rows + 2 ; // 行数
   this.level = config.level || 0; // 等级
-  this.leftTime = 10; // 剩余时间
+  this.leftTime = 201; // 剩余时间
   this.leftDisorderTime = 5; // 剩余重排次数
   this.gifts = [ // 小图片集合
     'images/metashit/angit.png',
@@ -2367,11 +2367,11 @@ function displayPrizes(score) {
   container.innerHTML = ''; 
 
   let numberOfImages = 0;
-  if (score > 50) {
+  if (score > 2000) {
       numberOfImages = 3;
-  } else if (score > 10) {
+  } else if (score > 1500) {
       numberOfImages = 2;
-  } else if (score > 500) {
+  } else if (score > 1000) {
       numberOfImages = 1;
   }
   const packId = localStorage.getItem('packId');
