@@ -1398,7 +1398,7 @@ function LinkGame2(config) {
   this.cols = config.cols + 2 ; // 列数
   this.rows = config.rows + 2 ; // 行数
   this.level = config.level || 0; // 等级
-  this.leftTime = 201; // 剩余时间
+  this.leftTime = 5; // 剩余时间
   this.leftDisorderTime = 5; // 剩余重排次数
   this.gifts = [ // 小图片集合
     'images/metashit/angit.png',
@@ -2183,16 +2183,24 @@ $(function () {
 $(function () {
   $('.get-token3').click(function () {
     $('.time-out').addClass('hidden');
-    displayPrizes(linkgame.score);
-    
-    $('.luckybox').removeClass('hidden');
-    $('audio').get(0).pause();
-    $('audio').get(7).play();
-    setTimeout(function () {
-      $('.b6').removeClass('hidden');
-      $('audio').get(7).pause();
-      $('audio').get(7).currentTime = 0;
-    }, 1000);
+    const s = displayPrizes(linkgame.score);
+    if (s === 0){
+      $('.noPrize').removeClass('hidden');
+      $('audio').get(0).pause();
+      setTimeout(function () {
+        $('.b6').removeClass('hidden');
+      }, 1000);
+    }
+    else{
+      $('.luckybox').removeClass('hidden');
+      $('audio').get(0).pause();
+      $('audio').get(7).play();
+      setTimeout(function () {
+        $('.b6').removeClass('hidden');
+        $('audio').get(7).pause();
+        $('audio').get(7).currentTime = 0;
+      }, 1000);
+    }
   });
 });
 
@@ -2201,6 +2209,7 @@ $(function () {
     window.linkgame.unbindDomEvents();
     $('audio').get(0).currentTime = 0;
     $('.luckybox').addClass('hidden');
+    $('.noPrize').addClass('hidden');
     $('.b6').addClass('hidden')
     $('.init-box').removeClass('hidden');
     $('.game-box').addClass('hidden');
@@ -2367,11 +2376,13 @@ function displayPrizes(score) {
   container.innerHTML = ''; 
 
   let numberOfImages = 0;
-  if (score > 2000) {
+  if (score >= 4000){
+    numberOfImages = 4;
+  }else if (score >= 3000) {
       numberOfImages = 3;
-  } else if (score > 1500) {
+  } else if (score >= 2000) {
       numberOfImages = 2;
-  } else if (score > 1000) {
+  } else if (score >= 1000) {
       numberOfImages = 1;
   }
   const packId = localStorage.getItem('packId');
@@ -2393,5 +2404,8 @@ function displayPrizes(score) {
       luckyPrizes[0].style.marginTop = '20%';
   } else if (numberOfImages === 3) {
       luckyPrizes[0].style.marginTop = '10%';
+  } else if (numberOfImages === 4) {
+      luckyPrizes[0].style.marginTop = '5%';
   }
+  return numberOfImages;
 }
