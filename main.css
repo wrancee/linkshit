@@ -1022,7 +1022,7 @@
 
 .wrapper .bag .redeem-btn {
   position: absolute;
-  top: 295px;
+  top: 400px;
   left: 310px;
   width: 200px;
   height: 65px;
@@ -1035,7 +1035,7 @@
 }
 .wrapper .bag .redeem-btn span {
   font-family: 'Crang', sans-serif; 
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
   text-align: center;
