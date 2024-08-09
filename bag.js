@@ -208,7 +208,7 @@ $(function () {
     });
 
     function updateRedeemButtonState() {
-        const redeemBtn = $('#redeem-btn');
+        const redeemBtn = $('.redeem-btn');
 
         if (activeSlots.size > 0) {
             redeemBtn.prop('disabled', false);
@@ -219,10 +219,8 @@ $(function () {
         }
     }
 
-    $('#redeem-btn').click(function () {
-        if (activeSlots.size > 0) {
-            console.log('Redeeming prizes from slots:', Array.from(activeSlots));
-        }
+    $('.redeem-btn').click(function () {
+        console.log("exchange successfully")
     });
 
     let currentPage = 1;
