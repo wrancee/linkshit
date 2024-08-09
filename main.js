@@ -1398,8 +1398,8 @@ function LinkGame2(config) {
   this.cols = config.cols + 2 ; // 列数
   this.rows = config.rows + 2 ; // 行数
   this.level = config.level || 0; // 等级
-  this.leftTime = 201; // 剩余时间
-  this.leftDisorderTime = 2; // 剩余重排次数
+  this.leftTime = 2; // 剩余时间
+  this.leftDisorderTime = 201; // 剩余重排次数
   this.gifts = [ // 小图片集合
     'images/metashit/angit.png',
     'images/metashit/baseshit.png',
@@ -2100,10 +2100,10 @@ $(function () {
 
 $(function () {
   $('.claim2').click(function () {
-    $('.level1').removeClass('hidden');
-    setTimeout(function () {
-      $('.b1').removeClass('hidden');
-    }, 800);
+    //$('.level1').removeClass('hidden');
+    //setTimeout(function () {
+      //$('.b1').removeClass('hidden');
+    //}, 800);
   });
 });
 
