@@ -1022,7 +1022,7 @@
 
 .wrapper .bag .redeem-btn {
   position: absolute;
-  top: 447px;
+  top: 443px;
   left: 310px;
   width: 200px;
   height: 65px;
@@ -1030,7 +1030,6 @@
   cursor: not-allowed;
 }
 .wrapper .bag .redeem-btn.active {
-  background-color: green;
   cursor: pointer;
 }
 .wrapper .bag .redeem-btn span {
