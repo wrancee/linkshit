@@ -2383,8 +2383,6 @@ function displayPrizes(score) {
       const imgElement = document.createElement('div');
       imgElement.className = 'luckyprize';
       imgElement.style.backgroundImage = `url('${imgSrc}')`;
-      imgElement.style.top = `${i * 220}px`; // Adjust top position for vertical alignment
-
       container.appendChild(imgElement);
   }
 }
