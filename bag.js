@@ -187,7 +187,7 @@ $(function () {
       $('.init-box').removeClass('hidden');
     });
   });
-  
+
 $(function () {
     let activeSlots = new Set(); // Keep track of activated slots
 
@@ -203,6 +203,25 @@ $(function () {
                 $(this).addClass('active');
                 activeSlots.add(slotIndex);
             }
+        }
+        updateRedeemButtonState();
+    });
+
+    function updateRedeemButtonState() {
+        const redeemBtn = $('#redeem-btn');
+
+        if (activeSlots.size > 0) {
+            redeemBtn.prop('disabled', false);
+            redeemBtn.addClass('active');
+        } else {
+            redeemBtn.prop('disabled', true);
+            redeemBtn.removeClass('active');
+        }
+    }
+
+    $('#redeem-btn').click(function () {
+        if (activeSlots.size > 0) {
+            console.log('Redeeming prizes from slots:', Array.from(activeSlots));
         }
     });
 
