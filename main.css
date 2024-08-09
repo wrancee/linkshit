@@ -473,25 +473,20 @@
 
 .wrapper .luckybox{
   background-color: rgba(0, 0, 0, 0.4);
-
-  position: relative;
+  top: 0;
+  position: absolute;
   width: 800px;
   height: 660px;
-  margin: 0 auto;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .wrapper .luckybox .luckyprize {
   animation: appear 0.6s linear, scale-up 0.6s linear;
-
-  width: 200px; /* Adjust width as needed */
-  height: 200px; /* Adjust height as needed */
+  width: 200px;
+  height: 106px;
   background-size: contain;
-  background-repeat: no-repeat;
   background-position: center;
-  margin-bottom: 5px; /* Space between images */
+  background-repeat: no-repeat;
+  margin: 10px auto;
 }
 
 
