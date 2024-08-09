@@ -190,6 +190,29 @@ $(function () {
 
 $(function () {
     let activeSlots = new Set(); // Keep track of activated slots
+    let storedPrizes = null;
+    let currentPage = 1;
+    let totalPages = 1;
+    const itemsPerPage = 28;
+
+    async function fetchAndStorePrizes() {
+        try {
+            const prizes = await queryUserPrizeAccount();
+            if (prizes) {
+                storedPrizes = prizes;
+                const totalItems = prizes.reduce((sum, prize) => sum + prize.amount, 0);
+                console.log("Total prize amount:", totalItems); // Debugging output
+                totalPages = Math.ceil(totalItems / itemsPerPage);
+                displayPrizesInBag(storedPrizes, currentPage); // Pre-display prizes
+            } else {
+                console.error('Failed to fetch user prizes or no prizes available.');
+            }
+        } catch (error) {
+            console.error('Error fetching prizes:', error);
+        }
+    }
+    // Fetch the prizes as soon as the page loads
+    fetchAndStorePrizes();
 
     $('.slot').click(function () {
         const slotIndex = $(this).data('slot-index');
@@ -222,10 +245,6 @@ $(function () {
     $('.redeem-btn').click(function () {
         console.log("exchange successfully")
     });
-
-    let currentPage = 1;
-    let totalPages = 1;
-    const itemsPerPage = 28;
 
     $('.bag-btn').click(async function () {
         $('.bag').removeClass('hidden');
