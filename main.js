@@ -2184,8 +2184,7 @@ $(function () {
   $('.get-token3').click(function () {
     $('.time-out').addClass('hidden');
     displayPrizes(linkgame.score);
-    //调试
-    console.log("score is ", linkgame.score);
+    
     $('.luckybox').removeClass('hidden');
     $('audio').get(0).pause();
     $('audio').get(7).play();
@@ -2368,14 +2367,14 @@ function displayPrizes(score) {
   container.innerHTML = ''; 
 
   let numberOfImages = 0;
-  if (score > 10) {
+  if (score > 50) {
       numberOfImages = 3;
-  } else if (score > 1000) {
+  } else if (score > 10) {
       numberOfImages = 2;
   } else if (score > 500) {
       numberOfImages = 1;
   }
-
+  const packId = localStorage.getItem('packId');
   for (let i = 0; i < numberOfImages; i++) {
       const randomId = getRandomPrize();
       const imgSrc = prizeImageMap[randomId];
@@ -2384,5 +2383,15 @@ function displayPrizes(score) {
       imgElement.className = 'luckyprize';
       imgElement.style.backgroundImage = `url('${imgSrc}')`;
       container.appendChild(imgElement);
+      handlePrize(packId, randomId);
+  }
+  const luckyPrizes = container.querySelectorAll('.luckyprize');
+
+  if (numberOfImages === 1) {
+      luckyPrizes[0].style.marginTop = '30%';
+  } else if (numberOfImages === 2) {
+      luckyPrizes[0].style.marginTop = '20%';
+  } else if (numberOfImages === 3) {
+      luckyPrizes[0].style.marginTop = '10%';
   }
 }
